@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MyViralReach – Influencer Marketing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+html{scroll-behavior:smooth}
+body{
+background:radial-gradient(circle at top,#1b0033,#050010);
+color:#fff;overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+position:fixed;top:0;width:100%;
+display:flex;justify-content:space-between;
+align-items:center;
+padding:18px 60px;
+background:rgba(0,0,0,.6);
+backdrop-filter:blur(20px);
+z-index:999;
+}
+nav a{color:#fff;text-decoration:none;margin-left:22px}
+
+/* HERO */
+.hero{
+min-height:100vh;
+display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+text-align:center;padding:120px 20px;
+}
+.hero h1{
+font-size:4.2rem;
+background:linear-gradient(90deg,#ff61ff,#00eaff);
+-webkit-background-clip:text;color:transparent;
+}
+.hero p{max-width:720px;margin-top:20px;color:#ddd}
+.hero button{
+margin-top:40px;
+padding:18px 60px;
+border:none;border-radius:60px;
+background:linear-gradient(90deg,#ff61ff,#00eaff);
+font-weight:700;cursor:pointer;
+box-shadow:0 0 40px #00eaff;
+}
+
+/* SECTION */
+section{padding:120px 70px}
+h2{
+font-size:2.8rem;margin-bottom:35px;
+background:linear-gradient(90deg,#ff61ff,#00eaff);
+-webkit-background-clip:text;color:transparent;
+}
+
+/* CARDS */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:40px;
+}
+.card{
+background:rgba(255,255,255,.12);
+padding:45px;border-radius:32px;
+backdrop-filter:blur(22px);
+box-shadow:0 40px 90px rgba(0,0,0,.45);
+transition:.4s;
+}
+.card:hover{transform:translateY(-15px)}
+
+/* FORM */
+.form-box{
+max-width:850px;margin:auto;
+background:rgba(255,255,255,.12);
+padding:60px;border-radius:40px;
+box-shadow:0 0 70px rgba(0,234,255,.25);
+}
+input,select,textarea{
+width:100%;
+padding:15px;margin:12px 0;
+border:none;border-radius:12px;
+background:#0b0f1a;color:#fff;
+}
+.big-btn{
+margin-top:20px;
+padding:18px;border:none;border-radius:60px;
+background:linear-gradient(90deg,#ff61ff,#00eaff);
+font-weight:700;cursor:pointer;width:100%;
+}
+#status{margin-top:15px}
+
+/* FOOTER */
+footer{
+padding:60px;text-align:center;
+color:#aaa;border-top:1px solid rgba(255,255,255,.15);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<b>MyViralReach</b>
+<div>
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#brands">Brands</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+
+<div class="hero" id="home">
+<h1>Influencer Marketing, Reimagined</h1>
+<p>Connecting brands with trusted creators for real growth.</p>
+<button onclick="location.href='#brands'">Start Campaign</button>
+</div>
+
+<section id="services">
+<h2>Our Services</h2>
+<div class="grid">
+<div class="card">Instagram Reels & Stories</div>
+<div class="card">YouTube Shorts & Videos</div>
+<div class="card">Brand–Creator Collaboration</div>
+<div class="card">Campaign Strategy & Reporting</div>
+</div>
+</section>
+
+<!-- BRAND FORM -->
+<section id="brands">
+<h2>Brand Campaign Form</h2>
+<div class="form-box">
+<form id="brandForm">
+
+<input name="brand_name" placeholder="Brand Name" required>
+<input name="brand_website" placeholder="Website / Instagram">
+
+<select name="platform" required>
+<option value="">Platform Needed</option>
+<option>Instagram</option>
+<option>YouTube</option>
+<option>Both</option>
+</select>
+
+<select name="goal" required>
+<option value="">Campaign Goal</option>
+<option>Brand Awareness</option>
+<option>Sales</option>
+<option>App Install</option>
+</select>
+
+<input name="budget" placeholder="Budget Range" required>
+<input name="timeline" placeholder="Campaign Timeline">
+
+<textarea name="message" placeholder="Campaign Details"></textarea>
+
+<input type="email" name="email" placeholder="Contact Email" required>
+<input name="whatsapp" placeholder="WhatsApp Number">
+
+<button class="big-btn" type="submit">Submit Campaign</button>
+<p id="status"></p>
+
+</form>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<div class="form-box">
+<p>Email: <b>shivgarg597@gmail.com</b></p>
+<button class="big-btn" onclick="location.href='mailto:shivgarg597@gmail.com'">
+Send Email
+</button>
+</div>
+</section>
+
+<footer>
+© 2026 MyViralReach.com • Built for Growth 🚀
+</footer>
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+  emailjs.init("Qjee81I9Hf7ohhdgy"); // ✅ PUBLIC KEY ONLY
+})();
+
+document.getElementById("brandForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  emailjs.sendForm(
+    "YOUR_SERVICE_ID",     // 🔴 PASTE SERVICE ID
+    "YOUR_TEMPLATE_ID",    // 🔴 PASTE TEMPLATE ID
+    this
+  ).then(()=>{
+    status.innerHTML="✅ Campaign submitted successfully!";
+    brandForm.reset();
+  },()=>{
+    status.innerHTML="❌ Error sending. Please try again.";
+  });
+});
+</script>
+
+</body>
+</html>
