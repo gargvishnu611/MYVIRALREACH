@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyViralReach.com | Influencer Marketing Agency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary: #6c63ff;
+            --primary-glow: rgba(108, 99, 255, 0.5);
+            --secondary: #ff6b9d;
+            --secondary-glow: rgba(255, 107, 157, 0.5);
+            --accent: #00d9ff;
+            --accent-glow: rgba(0, 217, 255, 0.5);
+            --dark: #0a0a1a;
+            --darker: #050511;
+            --light: #f8f9ff;
+            --gray: #a0a7c2;
+            --success: #00ff9d;
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        h2 {
+            font-size: 3rem;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 2rem;
+            color: var(--light);
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(108, 99, 255, 0.2);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 20px var(--primary-glow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px var(--primary-glow);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 150px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(108, 99, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 107, 157, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--primary);
+            padding: 12px 28px;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(108, 99, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        /* Forms */
+        .form-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 50px;
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            border-radius: var(--radius);
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(5, 5, 17, 0.9);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(108, 99, 255, 0.2);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 { font-size: 3.2rem; }
+            h2 { font-size: 2.5rem; }
+            section { padding: 80px 0; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar .container { padding: 0 15px; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+                border-top: 1px solid rgba(108, 99, 255, 0.2);
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .form-container { padding: 30px 20px; }
+            .form-row { flex-direction: column; gap: 0; }
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 576px) {
+            h1 { font-size: 2.3rem; }
+            h2 { font-size: 1.8rem; }
+            .hero-buttons { flex-direction: column; }
+            .cta-button, .btn-secondary { width: 100%; text-align: center; }
+            .service-card { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-rocket"></i> My<span>Viral</span>Reach
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#for-brands">For Brands</a>
+                <a href="#for-creators">For Creators</a>
+                <a href="#contact">Contact</a>
+                <a href="#for-brands" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Amplify Your Brand With Influencer Power</h1>
+                <p>We connect innovative brands with authentic creators to create viral campaigns that drive real results. Our data-driven approach ensures maximum ROI for your influencer marketing budget.</p>
+                <div class="hero-buttons">
+                    <a href="#for-brands" class="cta-button">I'm a Brand <i class="fas fa-arrow-right"></i></a>
+                    <a href="#for-creators" class="btn-secondary">I'm a Creator <i class="fas fa-user-plus"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p>We offer end-to-end influencer marketing solutions tailored to your brand's unique needs and goals.</p>
+            
+            <div class="services-grid">
+                <div class="service-card floating">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Influencer Discovery</h3>
+                    <p>We identify the perfect creators for your brand using advanced AI-driven analysis of audience demographics, engagement rates, and content quality.</p>
+                </div>
+                
+                <div class="service-card floating" style="animation-delay: 1s;">
+                    <div class="service-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Campaign Management</h3>
+                    <p>From strategy to execution, we handle all aspects of your campaign including creator outreach, content approval, and performance tracking.</p>
+                </div>
+                
+                <div class="service-card floating" style="animation-delay: 2s;">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Performance Analytics</h3>
+                    <p>Comprehensive reporting on campaign performance with insights into reach, engagement, conversions, and ROI to inform future strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Brands Section -->
+    <section id="for-brands">
+        <div class="container">
+            <div class="form-title">
+                <h2>Brand Collaboration Request</h2>
+                <p>Fill out the form below and we'll create a customized influencer marketing strategy for your brand.</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="brandForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="brandName">Brand Name *</label>
+                            <input type="text" id="brandName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPerson">Contact Person *</label>
+                            <input type="text" id="contactPerson" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="website">Website / Instagram</label>
+                            <input type="text" id="website" class="form-control" placeholder="https://">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Contact Email *</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp Number</label>
+                            <input type="text" id="whatsapp" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Budget Range *</label>
+                            <select id="budget" class="form-control" required>
+                                <option value="">Select budget range</option>
+                                <option value="500-2000">$500 - $2,000</option>
+                                <option value="2000-5000">$2,000 - $5,000</option>
+                                <option value="5000-10000">$5,000 - $10,000</option>
+                                <option value="10000-25000">$10,000 - $25,000</option>
+                                <option value="25000+">$25,000+</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="platform">Platform(s) *</label>
+                            <select id="platform" class="form-control" required>
+                                <option value="">Select platform</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="YouTube">YouTube</option>
+                                <option value="TikTok">TikTok</option>
+                                <option value="Multiple">Multiple Platforms</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeline">Timeline *</label>
+                            <select id="timeline" class="form-control" required>
+                                <option value="">Select timeline</option>
+                                <option value="ASAP">ASAP</option>
+                                <option value="2-4 weeks">2-4 weeks</option>
+                                <option value="1-2 months">1-2 months</option>
+                                <option value="2+ months">2+ months</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="campaignGoal">Campaign Goal *</label>
+                        <select id="campaignGoal" class="form-control" required>
+                            <option value="">Select primary goal</option>
+                            <option value="Brand Awareness">Brand Awareness</option>
+                            <option value="Product Launch">Product Launch</option>
+                            <option value="Sales/Conversions">Sales/Conversions</option>
+                            <option value="Lead Generation">Lead Generation</option>
+                            <option value="Community Building">Community Building</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="campaignDetails">Campaign Details *</label>
+                        <textarea id="campaignDetails" class="form-control" placeholder="Tell us about your brand, target audience, and what you hope to achieve with influencer marketing..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="cta-button" style="width: 100%; padding: 18px;">
+                        Submit Request <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+                
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i> Thank you! Your brand request has been submitted successfully. We'll contact you within 24 hours.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Creators Section -->
+    <section id="for-creators">
+        <div class="container">
+            <h2>For Content Creators</h2>
+            <p>Join our exclusive network of influencers and get matched with brands that align with your content and audience.</p>
+            
+            <div class="form-container">
+                <div style="text-align: center; padding: 40px 20px;">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Join Our Creator Network</h3>
+                    <p>We're always looking for talented creators to collaborate with our brand partners. If you're an influencer interested in paid partnerships, please apply through our Google Form.</p>
+                    <a href="https://forms.gle/gqeakCTjyVFMNVd47" target="_blank" class="cta-button" style="margin-top: 20px;">
+                        Apply as Creator <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: var(--gray);">
+                        <i class="fas fa-shield-alt"></i> This form is exclusively for content creators, not for brands.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Have questions? Reach out to our team for more information about our services.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>shivgarg597@gmail.com</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Website</h3>
+                    <p>MyViralReach.com</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Response Time</h3>
+                    <p>Within 24 hours for brand inquiries</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="#" class="logo">
+                        <i class="fas fa-rocket"></i> My<span>Viral</span>Reach
+                    </a>
+                    <p style="margin-top: 20px;">Connecting innovative brands with authentic creators for impactful influencer marketing campaigns.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#for-brands">For Brands</a></li>
+                        <li><a href="#for-creators">For Creators</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Influencer Discovery</a></li>
+                        <li><a href="#services">Campaign Management</a></li>
+                        <li><a href="#services">Performance Analytics</a></li>
+                        <li><a href="#services">Brand Partnerships</a></li>
+                        <li><a href="#services">Creator Management</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 MyViralReach.com. All rights reserved. | Designed for influencer marketing excellence</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize EmailJS with your public key
+        // Replace with your actual EmailJS Public Key
+        emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+        
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+        
+        // Brand form submission
+        document.getElementById('brandForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                brandName: document.getElementById('brandName').value,
+                contactPerson: document.getElementById('contactPerson').value,
+                website: document.getElementById('website').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                budget: document.getElementById('budget').value,
+                platform: document.getElementById('platform').value,
+                timeline: document.getElementById('timeline').value,
+                campaignGoal: document.getElementById('campaignGoal').value,
+                campaignDetails: document.getElementById('campaignDetails').value,
+                submissionDate: new Date().toLocaleString()
+            };
+            
+            // In a real implementation, you would send this data via EmailJS
+            // For demo purposes, we'll simulate a successful submission
+            console.log("Form submitted:", formData);
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                document.getElementById('brandForm').reset();
+            }, 3000);
+            
+            // In production, uncomment and configure EmailJS code below:
+            /*
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => {
+                        document.getElementById('brandForm').reset();
+                    }, 3000);
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('There was an error submitting your form. Please try again or contact us directly.');
+                });
+            */
+        });
+        
+        // Add floating effect to service cards on scroll
+        document.addEventListener('scroll', function() {
+            const serviceCards = document.querySelectorAll('.service-card');
+            const scrollPosition = window.scrollY;
+            
+            serviceCards.forEach((card, index) => {
+                const cardPosition = card.getBoundingClientRect().top + scrollPosition;
+                const delay = index * 0.2;
+                
+                if (scrollPosition > cardPosition - window.innerHeight + 100) {
+                    card.style.animation = `float 6s ease-in-out ${delay}s infinite`;
+                }
+            });
+        });
+        
+        // Form validation
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() === '' && this.hasAttribute('required')) {
+                    this.style.borderColor = 'var(--secondary)';
+                } else {
+                    this.style.borderColor = 'rgba(108, 99, 255, 0.3)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
