@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyViralReach | Premium Influencer Marketing Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading">
+        <div class="loader-container">
+            <div class="loader"></div>
+            <div class="loader-text">
+                <span class="loader-gradient">MyViralReach</span>
+                <p>Premium Marketing Platform</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-chart-network"></i>
+                <span class="logo-gradient">MyViralReach</span>
+                <span class="logo-pro">PRO</span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="brands.html" class="nav-link">For Brands</a>
+                <a href="creators.html" class="nav-link">For Creators</a>
+                <a href="advertisers.html" class="nav-link">Advertisers</a>
+                <a href="tools.html" class="nav-link">Smart Tools</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="contact.html" class="nav-btn">Get Started</a>
+            </div>
+            
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="parallax-bg" id="parallax-bg"></div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="hero-gradient">Premium</span> Influencer Marketing
+                    <br>
+                    <span class="hero-subtitle">Powered by AI & Advanced Analytics</span>
+                </h1>
+                <p class="hero-desc">
+                    Enterprise-grade platform connecting brands with authentic creators. 
+                    Real-time analytics, smart matching, and guaranteed ROI.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="500">0</div>
+                        <div class="stat-label">Brands</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="10000">0</div>
+                        <div class="stat-label">Creators</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="2500">0</div>
+                        <div class="stat-label">Campaigns</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="98">0</div>
+                        <div class="stat-label">% Success</div>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="brands.html" class="btn-primary">
+                        <i class="fas fa-briefcase"></i> For Brands
+                    </a>
+                    <a href="creators.html" class="btn-secondary">
+                        <i class="fas fa-user-check"></i> For Creators
+                    </a>
+                    <a href="tools.html" class="btn-ghost">
+                        <i class="fas fa-tools"></i> View Tools
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="visual-container" id="threejs-container">
+                    <!-- 3D Visualization will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Enterprise-Grade Features</h2>
+                <p class="section-desc">Advanced tools for modern marketing teams</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Matchmaker</h3>
+                    <p>Intelligent algorithm matching brands with perfect creators using 50+ data points.</p>
+                    <a href="tools.html#matchmaker" class="feature-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-network"></i>
+                    </div>
+                    <h3>Real-time Analytics</h3>
+                    <p>Live dashboards with predictive analytics and performance forecasting.</p>
+                    <a href="tools.html#analytics" class="feature-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure Payments</h3>
+                    <p>Escrow system with automated payouts and dispute resolution.</p>
+                    <a href="tools.html#payments" class="feature-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content glass-card">
+                <h2>Ready to Transform Your Marketing?</h2>
+                <p>Start your free trial or schedule a demo with our experts.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn-primary btn-large">
+                        <i class="fas fa-rocket"></i> Start Free Trial
+                    </a>
+                    <a href="contact.html#demo" class="btn-secondary btn-large">
+                        <i class="fas fa-calendar"></i> Book Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-chart-network"></i>
+                        <span>MyViralReach</span>
+                    </div>
+                    <p>Premium influencer marketing platform with advanced AI tools.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Platform</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="brands.html">For Brands</a></li>
+                        <li><a href="creators.html">For Creators</a></li>
+                        <li><a href="tools.html">Smart Tools</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="advertisers.html#website">Website Ads</a></li>
+                        <li><a href="advertisers.html#tv">TV Promotion</a></li>
+                        <li><a href="advertisers.html#sports">Sports Sponsorship</a></li>
+                        <li><a href="tools.html#analytics">Analytics</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.html#demo">Book Demo</a></li>
+                        <li><a href="contact.html#trial">Free Trial</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 MyViralReach. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="contact.html">Contact: shivgarg597@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/loader.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="assets/visuals/3d-shapes.js"></script>
+</body>
+</html>
